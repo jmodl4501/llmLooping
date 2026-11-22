@@ -1,10 +1,15 @@
 @echo off
-REM ==== ZIP 검증 루프 실행 (Docker Desktop 필요, 목표는 goal.txt 편집) ====
+REM ==== ZIP 검증 루프 실행 ====
+REM Docker Desktop이 필요합니다. 목표는 goal.txt, 완료 기준은 cases/ 를 편집합니다.
 cd /d "%~dp0"
-if not exist .venv (echo 먼저 setup.bat 을 실행하세요. & pause & exit /b 1)
+if not exist .venv (
+  echo [ERROR] Run setup.bat first.
+  pause
+  exit /b 1
+)
 where docker >nul 2>nul
 if errorlevel 1 (
-  echo [경고] Docker가 없습니다. config.env에서 RUNNER=local 로 바꾸거나 Docker Desktop을 설치하세요.
+  echo [WARN] Docker not found. Set RUNNER=local in config.env or install Docker Desktop.
 )
 .venv\Scripts\python.exe controller.py %*
 pause

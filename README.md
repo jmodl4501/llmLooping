@@ -111,6 +111,7 @@ llm-loop/
 ├── config.py              # config.env 로더
 ├── config.env.example     # 설정 템플릿
 ├── setup.bat / start-chrome.bat / run-agent.bat / run-controller.bat
+│   (한글은 REM 주석에만, 코드는 전부 영어 + CRLF — cmd.exe 호환)
 ├── workspace/             # 에이전트 작업 폴더
 ├── scripts/               # chrome-cdp.ps1 / chrome-cdp.sh
 └── tests/                 # 단위 + 모의 E2E (아래 참고)
@@ -123,6 +124,7 @@ pip install -r requirements.txt
 playwright install chromium
 
 python tests/test_core.py        # 단위: ZIP 검증/완료 판정
+python tests/test_bat.py         # 단위: .bat CRLF/인코딩 Windows 호환성
 python tests/e2e_mock.py fixable # ZIP 루프 E2E: 실패 → 피드백 → PASS
 python tests/e2e_mock.py broken  # ZIP 루프 E2E: 최대 회차 후 FAIL
 python tests/e2e_agent.py        # 에이전트 루프 E2E: file/run/[DONE] 전 과정
